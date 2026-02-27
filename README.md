@@ -81,11 +81,20 @@ climate_analytics/
 │
 ├── dags/
 │   └── co2_pipeline_dag.py
+|
+├── dashboards/
+│   ├── dashboard_screenshots/
+|   └── CO2 Emissions Analytics Dashboard.lvdash.json
+|
+├── data/
+│   └── raw/
+|        └── owid-co2-data.csv
 │
 ├── notebooks/
-│   ├── 01_bronze_ingestion
-│   ├── 02_silver_cleaning
-│   └── 03_gold_kpis
+|   ├── setup.py
+│   ├── 01_bronze_ingestion.py
+│   ├── 02_silver_cleaning.py
+│   └── 03_gold_kpis.py
 │
 ├── README.md
 ```
