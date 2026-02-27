@@ -77,7 +77,7 @@ Interactive Dashboard
 # 📂 Project Structure
 
 ```
-co2-emissions-project/
+climate_analytics/
 │
 ├── dags/
 │   └── co2_pipeline_dag.py

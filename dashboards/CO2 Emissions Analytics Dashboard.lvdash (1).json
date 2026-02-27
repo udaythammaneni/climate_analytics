@@ -1,0 +1,370 @@
+{
+  "datasets": [
+    {
+      "name": "6d9ce6be",
+      "displayName": "Global_CO2_Trend",
+      "queryLines": [
+        "USE CATALOG `unityws`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    year,\n",
+        "    total_global_co2\n",
+        "FROM climate_analytics.gold.global_trends\n",
+        "ORDER BY year;"
+      ]
+    },
+    {
+      "name": "16144186",
+      "displayName": "Top Ten Countries by Carbon Emissions Ranking",
+      "queryLines": [
+        "USE CATALOG `unityws`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    country,\n",
+        "    total_co2\n",
+        "FROM climate_analytics.gold.top_polluters\n",
+        "ORDER BY total_co2 DESC\n",
+        "LIMIT 10;"
+      ]
+    },
+    {
+      "name": "907625a9",
+      "displayName": "Global Trends in Country Carbon Emissions and Growth",
+      "queryLines": [
+        "USE CATALOG `unityws`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    country,\n",
+        "    year,\n",
+        "    co2,\n",
+        "    yoy_growth\n",
+        "FROM climate_analytics.gold.country_analytics\n",
+        "WHERE yoy_growth IS NOT NULL;"
+      ]
+    },
+    {
+      "name": "ad19285b",
+      "displayName": "Global Emissions Overview as of Recent Trends",
+      "queryLines": [
+        "SELECT\r\n",
+        "    SUM(total_global_co2) AS total_emissions\r\n",
+        "FROM climate_analytics.gold.global_trends;"
+      ]
+    },
+    {
+      "name": "2d351aa1",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        "USE CATALOG `unityws`;\n",
+        "USE SCHEMA `default`;\n",
+        "\n",
+        "SELECT\n",
+        "    SUM(total_global_co2) AS total_emissions\n",
+        "FROM climate_analytics.gold.global_trends;"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "0f24e186",
+      "displayName": "Analytics",
+      "layout": [
+        {
+          "widget": {
+            "name": "b1dd7353",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "6d9ce6be",
+                  "fields": [
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "sum(total_global_co2)",
+                      "expression": "SUM(`total_global_co2`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Global Trend",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "layer"
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "year",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_global_co2)",
+                  "displayName": "total_global_co2",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 5,
+            "y": 0,
+            "width": 7,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "72e7d3f3",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "16144186",
+                  "fields": [
+                    {
+                      "name": "sum(total_co2)",
+                      "expression": "SUM(`total_co2`)"
+                    },
+                    {
+                      "name": "country",
+                      "expression": "`country`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Top Polluters",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "group"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "sum(total_co2)",
+                  "displayName": "total_co2",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "country",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 5,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "bc566df9",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "907625a9",
+                  "fields": [
+                    {
+                      "name": "country",
+                      "expression": "`country`"
+                    },
+                    {
+                      "name": "year",
+                      "expression": "`year`"
+                    },
+                    {
+                      "name": "sum(yoy_growth)",
+                      "expression": "SUM(`yoy_growth`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "YoY Growth",
+                "showTitle": true
+              },
+              "mark": {
+                "layout": "layer"
+              },
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "year",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(yoy_growth)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "country",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 5,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "86972df2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "2d351aa1",
+                  "fields": [
+                    {
+                      "name": "total_emissions",
+                      "expression": "`total_emissions`"
+                    },
+                    {
+                      "name": "count(*)",
+                      "expression": "COUNT(`*`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "mark": {
+                "layout": "layer"
+              },
+              "frame": {
+                "title": "KPI Card",
+                "showTitle": true
+              },
+              "widgetType": "histogram",
+              "encodings": {
+                "x": {
+                  "fieldName": "total_emissions",
+                  "displayName": "total_emissions",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(*)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 5,
+            "height": 4
+          }
+        },
+        {
+          "widget": {
+            "name": "country",
+            "queries": [
+              {
+                "name": "dashboards/01f112e568521d02bde7c8c073e74e8d/datasets/01f112ee087611e6988db930017c9f91_country",
+                "query": {
+                  "datasetName": "907625a9",
+                  "fields": [
+                    {
+                      "name": "country",
+                      "expression": "`country`"
+                    },
+                    {
+                      "name": "country_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "showTitle": true,
+                "title": "country"
+              },
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "country",
+                    "queryName": "dashboards/01f112e568521d02bde7c8c073e74e8d/datasets/01f112ee087611e6988db930017c9f91_country"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 7,
+            "y": 4,
+            "width": 4,
+            "height": 1
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "a9bc4930",
+      "displayName": "Global Filters",
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
