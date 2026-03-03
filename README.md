@@ -50,17 +50,16 @@ Interactive Dashboard
 
 * Python
 * PySpark
-* Pandas (basic analysis)
 * Delta Lake
 
 ### Platform
 
-* Azure Databricks (Premium)
+* Azure Databricks
 * Unity Catalog
 
 ### Workflow Orchestration
 
-* Apache Airflow (Docker setup)
+* Apache Airflow
 
 ### Visualization
 
@@ -221,15 +220,3 @@ This enables interactive analytics and stakeholder reporting.
 4. Run Gold notebook.
 5. Trigger Airflow DAG.
 6. Access SQL Warehouse and Dashboard.
-
----
-
-# 🎓 Learning Outcomes
-
-This project demonstrates:
-
-* End-to-end data engineering pipeline design
-* PySpark transformations & window functions
-* Workflow automation using Airflow
-* Lakehouse architecture implementation
-* Analytical dashboard development
